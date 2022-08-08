@@ -1,7 +1,7 @@
-# MlopsZoomcampCourceProject 2022
+## MlopsZoomcampCourceProject 2022
 Repository includes code and document related to project for MLOps Zoomcamp course  https://github.com/DataTalksClub/mlops-zoomcamp
 
-Problem statement: Credit Card Attrition
+## Problem statement: Credit Card Attrition
 
 - Attrition on credit cards has become a major worry for the banking industry.
 Given that the expense of obtaining new consumers is higher than the expense of keeping existing customers, it significantly affects profitability.
@@ -9,3 +9,5 @@ Given that the expense of obtaining new consumers is higher than the expense of 
 - Attrition prediction models are important to reduce the cancellation of credit card products and analyze which customers have a greater tendency to cancel. 
 - This work was carried out through a strategic segmentation focusing on the client to generate campaigns according to the profile of each one, to understand and anticipate their behavior. Likewise, productive resources were focused on high-value groups, as it is cheaper to retain a client than attract a new one.
 
+## Dataset 
+[dataset](https://www.kaggle.com/code/mranmolsethxx/credit-card-attrition-rate-prediction/data) used for this project.
