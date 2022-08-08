@@ -10,4 +10,4 @@ Given that the expense of obtaining new consumers is higher than the expense of 
 - This work was carried out through a strategic segmentation focusing on the client to generate campaigns according to the profile of each one, to understand and anticipate their behavior. Likewise, productive resources were focused on high-value groups, as it is cheaper to retain a client than attract a new one.
 
 ## Dataset 
-[Dataset](https://www.kaggle.com/code/mranmolsethxx/credit-card-attrition-rate-prediction/data) used for this project.
+[Credit Card Churn Prediction](https://www.kaggle.com/datasets/anwarsan/credit-card-bank-churn) used for this project.
