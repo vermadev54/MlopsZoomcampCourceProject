@@ -1,6 +1,7 @@
 from this import d
 import pandas as pd
 import pickle
+import os
 
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
@@ -11,7 +12,7 @@ from sklearn.model_selection import train_test_split
 
 import xgboost as xgb
 
-from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
+from hyperopt import fmin, tpe, hp, STATUS_OK, Trials,space_eval
 from hyperopt.pyll import scope
 
 import mlflow
@@ -180,15 +181,28 @@ def main(data_path: str="./data/credit_card_churn.csv"):
                      le_Gender, le_Education_Level, le_Marital_Status, le_Income_Category, le_Card_Category)
 
 from prefect.deployments import DeploymentSpec
-
 from prefect.orion.schemas.schedules import IntervalSchedule
+from prefect.orion.schemas.schedules import CronSchedule
 from prefect.flow_runners import SubprocessFlowRunner
 from datetime import timedelta
 
 DeploymentSpec(
     flow=main,
     name="model_training",
-    schedule=IntervalSchedule(interval=timedelta(minutes=1)),
+    schedule=IntervalSchedule(interval=timedelta(minutes=5)),
     flow_runner=SubprocessFlowRunner(),
     tags=["ml"]
 )
+
+# DeploymentSpec(
+#     flow=main,
+#     name="model_training_2021-08-15",
+#     schedule=CronSchedule(
+#         cron="0 9 15 * *",
+#         timezone="America/New_York"),
+#     flow_runner=SubprocessFlowRunner(),
+#     tags=["ml"]
+# )
+
+
+
