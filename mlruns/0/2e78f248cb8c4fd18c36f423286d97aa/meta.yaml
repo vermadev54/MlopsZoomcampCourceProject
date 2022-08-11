@@ -1,0 +1,15 @@
+artifact_uri: s3://mlopszoomcamp/0/2e78f248cb8c4fd18c36f423286d97aa/artifacts
+end_time: 1660187511556
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 2e78f248cb8c4fd18c36f423286d97aa
+run_uuid: 2e78f248cb8c4fd18c36f423286d97aa
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1660187510810
+status: 3
+tags: []
+user_id: ubuntu
