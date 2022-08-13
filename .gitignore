@@ -18,3 +18,4 @@ __pycache__/
 **.terraform.lock*
 **terraform.tfstate*
 /mlruns
+847d1692e66dd5302daf9ca9e4c84afb

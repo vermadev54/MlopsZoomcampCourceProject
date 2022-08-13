@@ -20,6 +20,8 @@ import mlflow
 from prefect import flow, task
 from prefect.task_runners import SequentialTaskRunner
 
+from mlflow.models.signature import infer_signature
+
 @task
 def read_dataframe(filename):
     df = pd.read_csv(filename)
@@ -45,7 +47,7 @@ def preprocess(data: pd.DataFrame,\
     data['Income_Category_n'] = le_Income_Category.fit_transform(data['Income_Category'])
     data['Card_Category_n'] = le_Card_Category.fit_transform(data['Card_Category'])
 
-    data_n = data.drop(['Gender', 'Education_Level', 'Marital_Status', 'Income_Category', 'Card_Category'], axis = 1)
+    data_n = data.drop(['Gender', 'Education_Level', 'Marital_Status', 'Income_Category', 'Card_Category','Unnamed: 0'], axis = 1)
     data_n = data_n.drop('CLIENTNUM', axis = 1)
     train = data_n.drop('Attrition_Flag',  axis = 1)
     target = data_n['Attrition_Flag']
@@ -62,6 +64,7 @@ def preprocess(data: pd.DataFrame,\
     # test is now 10% of the initial data set
     # validation is now 15% of the initial data set
     x_val, x_test, y_val, y_test = train_test_split(x_test, y_test, test_size=test_ratio/(test_ratio + validation_ratio)) 
+
 
     return x_train, x_test, y_train, y_test, x_val, y_val, le_Gender, le_Education_Level, le_Marital_Status, le_Income_Category, le_Card_Category 
 
@@ -127,13 +130,21 @@ def train_best_model(x_train, y_train, x_val, y_val,x_test, y_test,\
         dump_pickle((x_train, y_train), os.path.join(dest_path, "train.pkl"))
         dump_pickle((x_val, y_val), os.path.join(dest_path, "valid.pkl"))
         dump_pickle((x_test, y_test), os.path.join(dest_path, "test.pkl"))
-   
+        dump_pickle(rf, os.path.join(dest_path, "rf.pkl"))
+
+        #model saving
+        signature = infer_signature(x_test, rf.predict(x_test))
+        mlflow.sklearn.log_model(rf, artifact_path="models_mlflow",signature=signature)
+
+        #scaler encoder 
+        mlflow.log_artifact(os.path.join(dest_path, "le_Gender.pkl"), artifact_path="encoder")
+        mlflow.log_artifact(os.path.join(dest_path, "le_Education_Level.pkl"), artifact_path="encoder")
+        mlflow.log_artifact(os.path.join(dest_path, "le_Marital_Status.pkl"), artifact_path="encoder")
+        mlflow.log_artifact(os.path.join(dest_path, "le_Income_Category.pkl"), artifact_path="encoder")
+        mlflow.log_artifact(os.path.join(dest_path, "le_Card_Category.pkl"), artifact_path="encoder")
+
+
         
-    
-            
-        mlflow.log_artifact("./models/le_Gender.pkl", artifact_path="preprocessor")
-        
-        mlflow.sklearn.log_model(rf, artifact_path="models_mlflow")
 
 @flow(task_runner=SequentialTaskRunner())
 def main(data_path: str="./data/credit_card_churn.csv"):
@@ -175,6 +186,7 @@ def main(data_path: str="./data/credit_card_churn.csv"):
     'min_samples_leaf': scope.int(hp.quniform('min_samples_leaf', 1, 4, 1)),
     'random_state': 42}
 
+    print(dict(x_train.iloc[0]))
     train_model_search(x_train, y_train, x_val, y_val, SPACE)
     
     train_best_model(x_train, y_train, x_val, y_val,x_test, y_test,\
@@ -186,13 +198,13 @@ from prefect.orion.schemas.schedules import CronSchedule
 from prefect.flow_runners import SubprocessFlowRunner
 from datetime import timedelta
 
-DeploymentSpec(
-    flow=main,
-    name="model_training",
-    schedule=IntervalSchedule(interval=timedelta(minutes=5)),
-    flow_runner=SubprocessFlowRunner(),
-    tags=["ml"]
-)
+# DeploymentSpec(
+#     flow=main,
+#     name="model_new",
+#     schedule=IntervalSchedule(interval=timedelta(minutes=5)),
+#     flow_runner=SubprocessFlowRunner(),
+#     tags=["ml"]
+# )
 
 # DeploymentSpec(
 #     flow=main,
@@ -203,6 +215,12 @@ DeploymentSpec(
 #     flow_runner=SubprocessFlowRunner(),
 #     tags=["ml"]
 # )
+
+main()
+
+
+
+
 
 
 
