@@ -32,7 +32,7 @@ python3 preprocessing_data.py
 
 * Model registery
 ```bash
-python3 train.py --data_path ./output
+python3 registry.py --data_path ./output
 ```
 
 ## running mlflow server with cloud db and s3 storage
