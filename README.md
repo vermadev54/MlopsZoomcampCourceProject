@@ -52,3 +52,8 @@ prefect config unset PREFECT_ORION_UI_API_URL
 prefect config set PREFECT_ORION_UI_API_URL="http://54.146.195.209:4200/api"
 prefect orion start --host 0.0.0.0
 ```
+
+## Directory details
+* /web-service: flask api + docker building + deployment api through docker
+
+* lambda-terraform: lambda function + docker pakaging + terraform LaC + Mlflow
