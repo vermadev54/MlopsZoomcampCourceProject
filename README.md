@@ -32,10 +32,10 @@ python3 preprocessing_data.py
 
 * Model registery
 ```bash
-python3 registry.py --data_path ./output
+python3 registry_model.py --data_path ./output
 ```
 
-*Prefect deployment with scheduled crons
+* Prefect deployment with scheduled crons
 
 ```bash
 prefect deployment create prefect_deploy.py
