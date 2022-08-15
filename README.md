@@ -35,6 +35,12 @@ python3 preprocessing_data.py
 python3 registry.py --data_path ./output
 ```
 
+*Prefect deployment with scheduled crons
+
+```bash
+prefect deployment create prefect_deploy.py
+```
+
 ## running mlflow server with cloud db and s3 storage
 ```bash 
 mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://mlflow:FdXoiuOCyQvyiDL0Gftk@mlflow-database.ciuzmsnp32jg.us-east-1.rds.amazonaws.com:5432/mlflow_db --default-artifact-root s3://jai-mlops-zoomcamp-tfstate
