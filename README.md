@@ -17,3 +17,32 @@ Predicting customers who are likely to drop off credit card. to work on customer
 
 ## Dataset 
 [Credit Card Churn Prediction](https://www.kaggle.com/datasets/anwarsan/credit-card-bank-churn) used for this project.
+
+## Solution i have build random forest classification model with accuracy ~98%
+
+* Model training 
+```bash
+python3 train.py --data_path 
+
+```
+* data preprocessing/training/mlflow experiment tracking /prefect Workflow orchestration 
+```bash
+python3 preprocessing_data.py
+```
+
+* Model registery
+```bash
+python3 train.py --data_path ./output
+```
+
+## running mlflow server with cloud db and s3 storage
+```bash 
+mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://mlflow:FdXoiuOCyQvyiDL0Gftk@mlflow-database.ciuzmsnp32jg.us-east-1.rds.amazonaws.com:5432/mlflow_db --default-artifact-root s3://jai-mlops-zoomcamp-tfstate
+```
+
+## running prefect server on remeote server for Workflow orchestration 
+```bash
+prefect config unset PREFECT_ORION_UI_API_URL
+prefect config set PREFECT_ORION_UI_API_URL="http://54.146.195.209:4200/api"
+prefect orion start --host 0.0.0.0
+```
