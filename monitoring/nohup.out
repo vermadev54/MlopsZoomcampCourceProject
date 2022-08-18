@@ -1,0 +1,6 @@
+[2022-08-18 04:37:58 +0000] [17295] [INFO] Starting gunicorn 20.1.0
+[2022-08-18 04:37:58 +0000] [17295] [INFO] Listening at: http://127.0.0.1:5000 (17295)
+[2022-08-18 04:37:58 +0000] [17295] [INFO] Using worker: sync
+[2022-08-18 04:37:58 +0000] [17300] [INFO] Booting worker with pid: 17300
+[2022-08-18 04:45:41 +0000] [17300] [INFO] Parent changed, shutting down: <Worker 17300>
+[2022-08-18 04:45:41 +0000] [17300] [INFO] Worker exiting (pid: 17300)
