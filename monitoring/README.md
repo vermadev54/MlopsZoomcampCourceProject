@@ -51,8 +51,8 @@ You can look at Prefect steps in Prefect Orion UI
 
 Open the newly created Evidently HTML file to find the report along with visualizations
 
-![](/MlopsZoomcampCourceProject/monitoring/image/Screenshot%202022-08-18%20at%204.09.36%20PM.png)
+![](/monitoring/image/Screenshot%202022-08-18%20at%204.09.36%20PM.png)
 
-![](/MlopsZoomcampCourceProject/monitoring/image/Screenshot%202022-08-18%20at%204.09.58%20PM.png)
+![](/monitoring/image/Screenshot%202022-08-18%20at%204.09.58%20PM.png)
 
-![](/MlopsZoomcampCourceProject/monitoring/image/Screenshot%202022-08-18%20at%204.10.15%20PM.png)
+![](/monitoring/image/Screenshot%202022-08-18%20at%204.10.15%20PM.png)
