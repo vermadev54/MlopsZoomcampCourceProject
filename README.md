@@ -54,9 +54,10 @@ prefect orion start --host 0.0.0.0
 ```
 
 ## Directory details
-* /web-service: flask api + docker building + deployment api through docker
+* /web-service: build flask api + docker pakaging + deployment api through docker
 
-* /lambda-terraform: lambda function + docker pakaging + terraform LaC + Mlflow
+* /lambda-terraform: build lambda function + docker pakaging + terraform LaC + Mlflow
+
+* /monitoring : build batch monitoring service with evidently
 
 
-* hello

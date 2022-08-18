@@ -13,7 +13,6 @@ Note: all actions expected to be executed in repo folder.
 
 - Create virtual environment and activate it (eg. `python -m venv venv && source ./venv/bin/activate`)
 - Install required packages `pip install -r requirements.txt`
-- Run `python prepare.py` for downloading datasets
 
 ## Monitoring Example
 
@@ -49,3 +48,11 @@ This script will:
 
 You can look at Prefect steps in Prefect Orion UI
 (to start it execute `prefect orion start --host 0.0.0.0`)
+
+Open the newly created Evidently HTML file to find the report along with visualizations
+
+![](/MlopsZoomcampCourceProject/monitoring/image/Screenshot%202022-08-18%20at%204.09.36%20PM.png)
+
+![](/MlopsZoomcampCourceProject/monitoring/image/Screenshot%202022-08-18%20at%204.09.58%20PM.png)
+
+![](/MlopsZoomcampCourceProject/monitoring/image/Screenshot%202022-08-18%20at%204.10.15%20PM.png)
