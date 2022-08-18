@@ -18,6 +18,16 @@ Predicting customers who are likely to drop off credit card. to work on customer
 ## Dataset 
 [Credit Card Churn Prediction](https://www.kaggle.com/datasets/anwarsan/credit-card-bank-churn) used for this project.
 
+
+## Directory details
+* /web-service: build flask api + docker pakaging + deployment api through docker
+
+* /lambda-terraform: build lambda function + docker pakaging + terraform LaC + Mlflow
+
+* /monitoring : build batch monitoring service with evidently
+
+
+
 ## Solution i have build random forest classification model with accuracy ~98%
 
 * Model training 
@@ -53,11 +63,5 @@ prefect config set PREFECT_ORION_UI_API_URL="http://54.146.195.209:4200/api"
 prefect orion start --host 0.0.0.0
 ```
 
-## Directory details
-* /web-service: build flask api + docker pakaging + deployment api through docker
-
-* /lambda-terraform: build lambda function + docker pakaging + terraform LaC + Mlflow
-
-* /monitoring : build batch monitoring service with evidently
 
 
