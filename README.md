@@ -19,7 +19,8 @@ Predicting customers who are likely to drop off credit card. to work on customer
 [Credit Card Churn Prediction](https://www.kaggle.com/datasets/anwarsan/credit-card-bank-churn) used for this project.
 
 
-## Directory details
+## Directory info: each directory have own readme file that talk about instruction to run
+
 * /web-service: build flask api + docker pakaging + deployment api through docker
 
 * /lambda-terraform: build lambda function + docker pakaging + terraform LaC + Mlflow
