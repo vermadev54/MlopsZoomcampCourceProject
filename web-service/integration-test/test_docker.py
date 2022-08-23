@@ -27,17 +27,17 @@ data={
  'Total_Ct_Chng_Q4_Q1': 0.514,
  'Avg_Utilization_Ratio': 0.172}
 
-print(json.dumps(data, indent=2))
+print("input data",json.dumps(data, indent=2))
 url = 'http://localhost:8001/predict'
 actual_response = requests.post(url, json=data)
-print('actual response:',actual_response.json())
+#print('actual response:',actual_response.json())
 actual_response=actual_response.json()
 
-print(json.dumps(actual_response, indent=2))
+print("actual_response",json.dumps(actual_response, indent=2))
 
 expected_response= {'Attrition_Flag_predicted': 'Attrited Customer', 'statusCode': 200}
 
-print(expected_response)
+print("expected_response",json.dumps(expected_response, indent=2) )
 
 
 
