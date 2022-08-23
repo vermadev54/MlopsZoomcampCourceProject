@@ -33,3 +33,10 @@ docker run -it --rm \
     -e AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" \
     credit-card-attrition:v1
 ```
+
+* Run integration test:
+
+```bash
+cd integration-test
+./run.sh 
+```
