@@ -34,9 +34,18 @@ docker run -it --rm \
     credit-card-attrition:v1
 ```
 
+* Run unit test:
+
+```bash
+cd test
+python model_test.py
+```
+
 * Run integration test:
 
 ```bash
 cd integration-test
 ./run.sh 
 ```
+
+
