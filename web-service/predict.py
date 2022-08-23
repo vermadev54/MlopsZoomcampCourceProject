@@ -34,8 +34,8 @@ SESSION_TOKEN = cred.token  ## optional
 
 #RUN_ID = os.getenv('RUN_ID')
 
-RUN_ID="d5bb00fc5a6345469baebb848ea950f7"
-logged_model = f's3://jai-mlops-zoomcamp-tfstate/1/{RUN_ID}/artifacts/models_mlflow'
+RUN_ID="96a17ab73a2645a2b7ecfeb4ef7cd6cd"
+logged_model = f's3://jai-mlops-data/1/{RUN_ID}/artifacts/models_mlflow'
 logged_artifact=f'1/{RUN_ID}/artifacts/encoder/'
 
 model = mlflow.pyfunc.load_model(logged_model)
@@ -52,22 +52,25 @@ def get_artifact_encoder(artifact_path):
                             aws_session_token = SESSION_TOKEN
                            )
 
-    response = s3client.get_object(Bucket='jai-mlops-zoomcamp-tfstate', Key=artifact_path)
+    response = s3client.get_object(Bucket='jai-mlops-data', Key=artifact_path)
 
     body = response['Body'].read()
     data = pickle.loads(body)
     return data
 
 
+le_Gender= get_artifact_encoder(os.path.join(logged_artifact, "le_Gender.pkl"))
+le_Education_Level= get_artifact_encoder(os.path.join(logged_artifact, "le_Education_Level.pkl"))
+le_Marital_Status= get_artifact_encoder(os.path.join(logged_artifact, "le_Marital_Status.pkl"))
+le_Income_Category= get_artifact_encoder(os.path.join(logged_artifact, "le_Income_Category.pkl"))
+le_Card_Category= get_artifact_encoder(os.path.join(logged_artifact, "le_Card_Category.pkl"))
+
+
+
+
+
 
 def prepare_features(data):
-    #load encoder from artifact
-    le_Gender= get_artifact_encoder(os.path.join(logged_artifact, "le_Gender.pkl"))
-    le_Education_Level= get_artifact_encoder(os.path.join(logged_artifact, "le_Education_Level.pkl"))
-    le_Marital_Status= get_artifact_encoder(os.path.join(logged_artifact, "le_Marital_Status.pkl"))
-    le_Income_Category= get_artifact_encoder(os.path.join(logged_artifact, "le_Income_Category.pkl"))
-    le_Card_Category= get_artifact_encoder(os.path.join(logged_artifact, "le_Card_Category.pkl"))
-
     #encode data
     data['Gender_n'] = le_Gender.transform([data['Gender']])[0]
     data['Education_Level_n'] = le_Education_Level.transform([data['Education_Level']])[0]
@@ -79,7 +82,7 @@ def prepare_features(data):
     dellist= ['Gender', 'Education_Level', 'Marital_Status', 'Income_Category', 'Card_Category']
     for key in dellist :
         del data[key]
-    
+
     return data
 
 
