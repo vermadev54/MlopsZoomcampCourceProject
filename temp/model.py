@@ -2,28 +2,21 @@ import os
 import json
 import base64
 import pickle
+
 import boto3
-import boto3.session
-
-from this import d
+import mlflow
 import pandas as pd
-
-
-from flask import Flask, request, jsonify
-
-from sklearn.metrics import accuracy_score
+import boto3.session
+from this import d
+from flask import Flask, jsonify, request
+from prefect import flow, task
+from hyperopt import STATUS_OK, Trials, hp, tpe, fmin
+from hyperopt.pyll import scope
+from sklearn.metrics import accuracy_score, mean_squared_error
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import mean_squared_error
+from prefect.task_runners import SequentialTaskRunner
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-
-from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
-from hyperopt.pyll import scope
-
-import mlflow
-
-from prefect import flow, task
-from prefect.task_runners import SequentialTaskRunner
 
 cred = boto3.Session().get_credentials()
 ACCESS_KEY = cred.access_key
