@@ -22,18 +22,52 @@ def test_base64_decode():
 def test_prepare_features():
     model_service = model.ModelService(None)
 
-    ride = {
-        "PULocationID": 130,
-        "DOLocationID": 205,
-        "trip_distance": 3.66,
-    }
+    data = {
+                'Customer_Age': 45,
+                'Gender': 'M',
+                'Dependent_count': 3,
+                'Education_Level': 'High School',
+                'Marital_Status': 'Married',
+                'Income_Category': '$60K - $80K',
+                'Card_Category': 'Blue',
+                'Months_on_book': 39,
+                'Total_Relationship_Count': 5,
+                'Months_Inactive_12_mon': 1,
+                'Contacts_Count_12_mon': 3,
+                'Credit_Limit': 12691.0,
+                'Total_Revolving_Bal': 777,
+                'Avg_Open_To_Buy': 11914.0,
+                'Total_Amt_Chng_Q4_Q1': 1.335,
+                'Total_Trans_Amt': 1144,
+                'Total_Trans_Ct': 42,
+                'Total_Ct_Chng_Q4_Q1': 1.625,
+                'Avg_Utilization_Ratio': 0.061
+                }
 
-    actual_features = model_service.prepare_features(ride)
+    actual_features = model_service.prepare_features(data)
 
     expected_fetures = {
-        "PU_DO": "130_205",
-        "trip_distance": 3.66,
-    }
+                        'Customer_Age': 45,
+                        'Dependent_count': 3,
+                        'Months_on_book': 39,
+                        'Total_Relationship_Count': 5,
+                        'Months_Inactive_12_mon': 1,
+                        'Contacts_Count_12_mon': 3,
+                        'Credit_Limit': 12691.0,
+                        'Total_Revolving_Bal': 777,
+                        'Avg_Open_To_Buy': 11914.0,
+                        'Total_Amt_Chng_Q4_Q1': 1.335,
+                        'Total_Trans_Amt': 1144,
+                        'Total_Trans_Ct': 42,
+                        'Total_Ct_Chng_Q4_Q1': 1.625,
+                        'Avg_Utilization_Ratio': 0.061,
+                        'Gender_n': 1,
+                        'Education_Level_n': 3,
+                        'Marital_Status_n': 1,
+                        'Income_Category_n': 2,
+                        'Card_Category_n': 0
+                        }
+    
 
     assert actual_features == expected_fetures
 
@@ -52,9 +86,27 @@ def test_predict():
     model_service = model.ModelService(model_mock)
 
     features = {
-        "PU_DO": "130_205",
-        "trip_distance": 3.66,
-    }
+                'Customer_Age': 45,
+                'Dependent_count': 3,
+                'Months_on_book': 39,
+                'Total_Relationship_Count': 5,
+                'Months_Inactive_12_mon': 1,
+                'Contacts_Count_12_mon': 3,
+                'Credit_Limit': 12691.0,
+                'Total_Revolving_Bal': 777,
+                'Avg_Open_To_Buy': 11914.0,
+                'Total_Amt_Chng_Q4_Q1': 1.335,
+                'Total_Trans_Amt': 1144,
+                'Total_Trans_Ct': 42,
+                'Total_Ct_Chng_Q4_Q1': 1.625,
+                'Avg_Utilization_Ratio': 0.061,
+                'Gender_n': 1,
+                'Education_Level_n': 3,
+                'Marital_Status_n': 1,
+                'Income_Category_n': 2,
+                'Card_Category_n': 0
+                }
+    
 
     actual_prediction = model_service.predict(features)
     expected_prediction = 10.0
@@ -82,14 +134,11 @@ def test_lambda_handler():
     actual_predictions = model_service.lambda_handler(event)
     expected_predictions = {
         'predictions': [
-            {
-                'model': 'ride_duration_prediction_model',
-                'version': model_version,
-                'prediction': {
-                    'ride_duration': 10.0,
-                    'ride_id': 256,
-                },
-            }
+                    {
+                    "model": "Credit_Card_Churn_Prediction",
+                    "version": "96a17ab73a2645a2b7ecfeb4ef7cd6cd",
+                    "prediction": {"Churn_Prediction": "Existing Customer", "profile":52}
+                    }
         ]
     }
 
