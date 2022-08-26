@@ -9,6 +9,7 @@ mlflow = "*"
 scikit-learn = "==1.0.2"
 hyperopt = "*"
 prefect = "==2.0b5"
+deepdiff = "*"
 
 [dev-packages]
 pytest = "*"
