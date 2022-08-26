@@ -52,7 +52,7 @@ def get_model_artifact_location(run_id):
 
 
 def get_artifact_encoder(artifact_path):
-    print(artifact_path)
+    #print(artifact_path)
 
     s3client = boto3.client('s3', 
                             aws_access_key_id = ACCESS_KEY, 
@@ -72,7 +72,7 @@ def load_model(run_id):
     model_path = get_model_location(run_id)
     artifact_path = get_model_artifact_location(run_id)
 
-    print("path",model_path,artifact_path)
+    #print("path",model_path,artifact_path)
 
     le_Gender= get_artifact_encoder(os.path.join(artifact_path, "le_Gender.pkl"))
     le_Education_Level= get_artifact_encoder(os.path.join(artifact_path, "le_Education_Level.pkl"))
