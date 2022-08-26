@@ -18,8 +18,7 @@ def test_base64_decode():
     expected_result = {'model': 'Credit_Card_Churn_Prediction', 'version': '96a17ab73a2645a2b7ecfeb4ef7cd6cd', 'prediction': {'Churn_Prediction': 'Existing Customer', 'profile_id': 52}}
 
     assert actual_result == expected_result
-    # print("actual_result:", actual_result)
-    # print("expected_result:", expected_result)
+
 
 
 def test_prepare_features():
@@ -117,8 +116,6 @@ def test_predict():
     actual_prediction = model_service.predict(features)
     expected_prediction = 'Existing Customer'
 
-    # print("actual_result:", actual_prediction)
-    # print("expected_result:", expected_prediction)
     assert actual_prediction == expected_prediction
 
 
@@ -156,7 +153,5 @@ def test_lambda_handler():
         ]
     }
 
-    print("actual_result:", actual_predictions)
-    print("expected_result:", expected_predictions)
 
     assert actual_predictions == expected_predictions
