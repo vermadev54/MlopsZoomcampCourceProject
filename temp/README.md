@@ -32,10 +32,12 @@
 4. And then check on CloudWatch logs. Or try `get-records` on the `output_kinesis_stream` (refer to `integration_test`)
 
     ```
-   {"model": "Credit_Card_Churn_Prediction",
+   {
+    "model": "Credit_Card_Churn_Prediction",
     "version": "96a17ab73a2645a2b7ecfeb4ef7cd6cd",
     "prediction": {"Churn_Prediction": "Existing Customer", "profile":52}
     }
+    
     ``` 
   
 
