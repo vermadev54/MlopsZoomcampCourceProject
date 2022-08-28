@@ -2,9 +2,9 @@ name : CI tests
 on: 
   pull_request:
     branches:
-      -'develop'
+      - 'develop'
     paths:
-      -'temp/**'
+      - 'temp/**'
 env:
     AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
     AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
@@ -16,8 +16,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
-          with:
-            python-version: 3.9
+        with:
+          python-version: 3.9
       - name: Install dependencies
         working-directory: "temp/"
         run: pip install pipenv && pipenv install --dev
