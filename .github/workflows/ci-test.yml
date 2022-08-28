@@ -29,9 +29,7 @@ jobs:
         working-directory: "temp"
         run: pipenv run pytest tests/
 
-      - name: Lint
-        working-directory: "temp"
-        run: pipenv run pylint --recursive=y .
+
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
