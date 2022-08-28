@@ -16,8 +16,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
-          with:
-            python-version: 3.9
+        with:
+          python-version: 3.9
+          
       - name: Install dependencies
         working-directory: "temp/"
         run: pip install pipenv && pipenv install --dev
@@ -39,7 +40,7 @@ jobs:
 tf-plan:
   runs-on: ubuntu-latest
   steps:
-    - uses: action/checkout@v2
+    - uses: actions/checkout@v2
     - name: Configure AWS creditential
       uses: aws-actions/configure-aws-credentials@v1
       with:
