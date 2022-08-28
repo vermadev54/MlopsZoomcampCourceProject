@@ -54,5 +54,7 @@ tf-plan:
     - name: TF plan
       id: plan
       working-directory: 'temp/infrastructure'
+
       run: |
         terraform init && terraform plan -var-file=vars/prod.tfvars
+
