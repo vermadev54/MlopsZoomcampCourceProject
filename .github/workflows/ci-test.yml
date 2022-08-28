@@ -39,7 +39,7 @@ jobs:
 tf-plan:
   runs-on: ubuntu-latest
   steps:
-    - uses: action/checkout@v2
+    - uses: actions/checkout@v2
     - name: Configure AWS creditential
       uses: aws-actions/configure-aws-credentials@v1
       with:
