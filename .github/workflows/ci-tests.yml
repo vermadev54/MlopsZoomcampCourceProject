@@ -4,7 +4,7 @@ on:
     branches:
       - 'develop'
     paths:
-      - 'temp/**'
+      - 'allconcept/**'
 
 
 env:
@@ -23,11 +23,11 @@ jobs:
           python-version: 3.9
 
       - name: Install dependencies
-        working-directory: "temp"
+        working-directory: "allconcept"
         run: pip install pipenv && pipenv install --dev
 
       - name: Run Unit tests
-        working-directory: "temp"
+        working-directory: "allconcept"
         run: pipenv run pytest tests/
 
 
@@ -55,6 +55,6 @@ jobs:
 
       - name: TF plan
         id: plan
-        working-directory: 'temp/infrastructure'
+        working-directory: 'allconcept/infrastructure'
         run: |
           terraform init -backend-config="key=mlops-zoomcamp-prod.tfstate" --reconfigure && terraform plan --var-file vars/prod.tfvars
