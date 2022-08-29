@@ -73,7 +73,7 @@ jobs:
           LAMBDA_FUNCTION: ${{ steps.tf-apply.outputs.lambda_function }}
           PREDICTIONS_STREAM_NAME: ${{ steps.tf-apply.outputs.predictions_stream_name }}
           MODEL_BUCKET: ${{ steps.tf-apply.outputs.model_bucket }}
-          RUN_ID: ${{ RUN_ID }}
+          RUN_ID: '96a17ab73a2645a2b7ecfeb4ef7cd6cd'
         run: |
           variables="{ \
                     PREDICTIONS_STREAM_NAME=$PREDICTIONS_STREAM_NAME, MODEL_BUCKET=$MODEL_BUCKET, RUN_ID=$RUN_ID \
