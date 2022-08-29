@@ -13,7 +13,7 @@ else
     echo "no need to build image ${LOCAL_IMAGE_NAME}"
 fi
 
-export PREDICTIONS_STREAM_NAME="ride_predictions"
+export PREDICTIONS_STREAM_NAME="credit-profile"
 
 docker-compose up -d
 
