@@ -121,6 +121,7 @@ steps:
     {"model": "Credit_Card_Churn_Prediction", "version": "96a17ab73a2645a2b7ecfeb4ef7cd6cd", "prediction": {"Churn_Prediction": "Existing Customer", "profile_id": 10}}
 
     ``` 
+    ![screenshort](/images/echo1.png)
 
 
 
