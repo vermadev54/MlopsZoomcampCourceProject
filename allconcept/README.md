@@ -63,7 +63,8 @@
     
 
 ## Pre-commit-hooks:
-    ![pre-commit-hooks](/allconcept/images/pre-commit-hooks.png)
+    
+![pre-commit](/allconcept/images/pre-commit-hooks.png)
 
 
 
