@@ -13,7 +13,8 @@ disable = [
     "unused-import",
     "unused-variable",
     "too-many-instance-attributes",
-    "too-many-arguments"
+    "too-many-arguments",
+    "ungrouped-imports"
 
 
 ]
