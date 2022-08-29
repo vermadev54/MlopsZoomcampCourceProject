@@ -54,11 +54,11 @@
 1. Create a PR (feature branch): `.github/workflows/ci-tests.yml`
     * Env setup, Unit test, Integration test, Terraform plan
 
-    ![ci-test](/allconcept/images/CI-tests.png =250x250)
+    ![ci-test](/allconcept/images/CI-tests.png)
 2. Merge PR to `develop`: `.github/workflows/cd-deploy.yml`
     * Terraform plan, Terraform apply, Docker build & ECR push, Update Lambda config
 
-    ![cd-deploy](/allconcept/images/CD-deploy.png=250x250)
+    ![cd-deploy](/allconcept/images/CD-deploy.png)
 
 
 
@@ -113,7 +113,8 @@ steps:
    ```
     RESULT=$(aws kinesis get-records --shard-iterator $SHARD_ITERATOR)
     ``` 
-![Records in stream](/allconcept/images/echo1.png)
+    ![Records in stream](/allconcept/images/echo1.png)
+    ![Records in stream]<img src="https://allconcept/images/echo1.png" width="400" height="790">
 7. echo result
    ```
     echo ${RESULT} | jq -r '.Records[0].Data' | base64 --decode
