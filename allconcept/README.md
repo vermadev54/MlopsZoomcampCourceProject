@@ -111,7 +111,17 @@ steps:
 7. echo result
    ```
     echo ${RESULT} | jq -r '.Records[0].Data' | base64 --decode
+
     ``` 
+    OUTPUT: 
+
+    ```
+    (temp) (base) ubuntu@ip-172-31-87-216:~/MlopsZoomcampCourceProject$ echo ${RESULT} | jq -r '.Records[0].Data' | base64 --decode
+
+    {"model": "Credit_Card_Churn_Prediction", "version": "96a17ab73a2645a2b7ecfeb4ef7cd6cd", "prediction": {"Churn_Prediction": "Existing Customer", "profile_id": 10}}
+
+    ``` 
+
 
 
 
