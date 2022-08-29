@@ -114,7 +114,7 @@ steps:
     RESULT=$(aws kinesis get-records --shard-iterator $SHARD_ITERATOR)
     ``` 
     ![Records in stream](/allconcept/images/echo1.png)
-    ![Records in stream]<img src="https://allconcept/images/echo1.png" width="400" height="790">
+
 7. echo result
    ```
     echo ${RESULT} | jq -r '.Records[0].Data' | base64 --decode
