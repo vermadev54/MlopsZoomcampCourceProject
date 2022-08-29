@@ -27,6 +27,8 @@ Predicting customers who are likely to drop off credit card. to work on customer
 
 * /monitoring : build batch monitoring service with evidently
 
+* /allconcept : build streaming api with (unit test + code lint + LaC + cicd ) 
+
 
 
 ## Solution i have build random forest classification model with accuracy ~98%
