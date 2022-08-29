@@ -54,11 +54,11 @@
 1. Create a PR (feature branch): `.github/workflows/ci-tests.yml`
     * Env setup, Unit test, Integration test, Terraform plan
 
-    ![ci-test](/allconcept/images/CI-tests.png)
+    ![ci-test](/allconcept/images/CI-tests.png =250x250)
 2. Merge PR to `develop`: `.github/workflows/cd-deploy.yml`
     * Terraform plan, Terraform apply, Docker build & ECR push, Update Lambda config
 
-    ![cd-deploy](/allconcept/images/CD-deploy.png)
+    ![cd-deploy](/allconcept/images/CD-deploy.png=250x250)
 
 
 
@@ -113,7 +113,7 @@ steps:
    ```
     RESULT=$(aws kinesis get-records --shard-iterator $SHARD_ITERATOR)
     ``` 
-
+![Records in stream](/allconcept/images/echo1.png)
 7. echo result
    ```
     echo ${RESULT} | jq -r '.Records[0].Data' | base64 --decode
@@ -127,7 +127,7 @@ steps:
     {"model": "Credit_Card_Churn_Prediction", "version": "96a17ab73a2645a2b7ecfeb4ef7cd6cd", "prediction": {"Churn_Prediction": "Existing Customer", "profile_id": 10}}
 
     ``` 
-    ![Records in stream](/allconcept/images/echo1.png)
+    
     ![result](/allconcept/images/echo2.png)
 
 
