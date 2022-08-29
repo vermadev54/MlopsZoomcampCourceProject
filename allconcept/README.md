@@ -59,6 +59,12 @@
     * Terraform plan, Terraform apply, Docker build & ECR push, Update Lambda config
 
     ![cd-deploy](/allconcept/images/CD-deploy.png)
+    
+    
+
+## Pre-commit-hooks:
+    ![pre-commit-hooks](/allconcept/images/pre-commit-hooks.png)
+
 
 
 
