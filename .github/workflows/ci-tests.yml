@@ -30,6 +30,9 @@ jobs:
         working-directory: "allconcept"
         run: pipenv run pytest tests/
 
+      - name: Lint
+        working-directory: "allconcept"
+        run: pipenv run pylint --recursive=y .      
 
 
       - name: Configure AWS Credentials
@@ -57,4 +60,4 @@ jobs:
         id: plan
         working-directory: 'allconcept/infrastructure'
         run: |
-          terraform init -backend-config="key=mlops-zoomcamp-prod.tfstate" --reconfigure && terraform plan --var-file vars/prod.tfvars
+          terraform init -backend-config="key=credit-profile-prod.tfstate" --reconfigure && terraform plan --var-file vars/prod.tfvars
