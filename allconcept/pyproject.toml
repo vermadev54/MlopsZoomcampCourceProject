@@ -9,7 +9,7 @@ disable = [
     "too-few-public-methods",
     "Trailing whitespace",
     "line-too-long",
-    "trailing-whitespace"
+    "trailing-whitespace",
     "unused-import",
     "unused-variable",
     "too-many-instance-attributes",
