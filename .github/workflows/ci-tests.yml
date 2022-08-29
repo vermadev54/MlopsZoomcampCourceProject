@@ -61,5 +61,3 @@ jobs:
         working-directory: 'allconcept/infrastructure'
         run: |
           terraform init -backend-config="key=credit-profile-prod.tfstate" --reconfigure && terraform plan --var-file vars/prod.tfvars
-
-          
