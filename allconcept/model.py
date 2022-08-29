@@ -33,8 +33,11 @@ def get_model_location(run_id):
     model_bucket = os.getenv('MODEL_BUCKET', 'jai-mlops-data')
     experiment_id = os.getenv('MLFLOW_EXPERIMENT_ID', '1')
 
-    model_location = f's3://{model_bucket}/{experiment_id}/{run_id}/artifacts/models_mlflow'
+    model_location = (
+        f's3://{model_bucket}/{experiment_id}/{run_id}/artifacts/models_mlflow'
+    )
     return model_location
+
 
 def get_model_artifact_location(run_id):
     model_artifact_location = os.getenv('MODEL_ARTIFACT_LOCATION')
@@ -46,19 +49,19 @@ def get_model_artifact_location(run_id):
     experiment_id = os.getenv('MLFLOW_EXPERIMENT_ID', '1')
 
     model_artifact_location = f'{experiment_id}/{run_id}/artifacts/encoder'
-   
+
     return model_artifact_location
 
 
-
 def get_artifact_encoder(artifact_path):
-    #print(artifact_path)
+    # print(artifact_path)
 
-    s3client = boto3.client('s3', 
-                            aws_access_key_id = ACCESS_KEY, 
-                            aws_secret_access_key = SECRET_KEY, 
-                            aws_session_token = SESSION_TOKEN
-                           )
+    s3client = boto3.client(
+        's3',
+        aws_access_key_id=ACCESS_KEY,
+        aws_secret_access_key=SECRET_KEY,
+        aws_session_token=SESSION_TOKEN,
+    )
 
     response = s3client.get_object(Bucket='jai-mlops-data', Key=artifact_path)
 
@@ -67,22 +70,36 @@ def get_artifact_encoder(artifact_path):
     return data
 
 
-
 def load_model(run_id):
     model_path = get_model_location(run_id)
     artifact_path = get_model_artifact_location(run_id)
 
-    #print("path",model_path,artifact_path)
+    # print("path",model_path,artifact_path)
 
-    le_Gender= get_artifact_encoder(os.path.join(artifact_path, "le_Gender.pkl"))
-    le_Education_Level= get_artifact_encoder(os.path.join(artifact_path, "le_Education_Level.pkl"))
-    le_Marital_Status= get_artifact_encoder(os.path.join(artifact_path, "le_Marital_Status.pkl"))
-    le_Income_Category= get_artifact_encoder(os.path.join(artifact_path, "le_Income_Category.pkl"))
-    le_Card_Category= get_artifact_encoder(os.path.join(artifact_path, "le_Card_Category.pkl"))
-    
+    le_Gender = get_artifact_encoder(os.path.join(artifact_path, "le_Gender.pkl"))
+    le_Education_Level = get_artifact_encoder(
+        os.path.join(artifact_path, "le_Education_Level.pkl")
+    )
+    le_Marital_Status = get_artifact_encoder(
+        os.path.join(artifact_path, "le_Marital_Status.pkl")
+    )
+    le_Income_Category = get_artifact_encoder(
+        os.path.join(artifact_path, "le_Income_Category.pkl")
+    )
+    le_Card_Category = get_artifact_encoder(
+        os.path.join(artifact_path, "le_Card_Category.pkl")
+    )
+
     model = mlflow.pyfunc.load_model(model_path)
 
-    return model,le_Gender,le_Education_Level,le_Marital_Status,le_Income_Category,le_Card_Category
+    return (
+        model,
+        le_Gender,
+        le_Education_Level,
+        le_Marital_Status,
+        le_Income_Category,
+        le_Card_Category,
+    )
 
 
 def base64_decode(encoded_data):
@@ -92,35 +109,59 @@ def base64_decode(encoded_data):
 
 
 class ModelService:
-    def __init__(self, model,le_Gender,le_Education_Level,le_Marital_Status,le_Income_Category,le_Card_Category,model_version=None, callbacks=None):
+    def __init__(
+        self,
+        model,
+        le_Gender,
+        le_Education_Level,
+        le_Marital_Status,
+        le_Income_Category,
+        le_Card_Category,
+        model_version=None,
+        callbacks=None,
+    ):
         self.model = model
         self.model_version = model_version
-        self.le_Gender=le_Gender
-        self.le_Education_Level=le_Education_Level
-        self.le_Marital_Status=le_Marital_Status
-        self.le_Income_Category=le_Income_Category
-        self.le_Card_Category=le_Card_Category
+        self.le_Gender = le_Gender
+        self.le_Education_Level = le_Education_Level
+        self.le_Marital_Status = le_Marital_Status
+        self.le_Income_Category = le_Income_Category
+        self.le_Card_Category = le_Card_Category
         self.callbacks = callbacks or []
 
     def prepare_features(self, data):
         features = {}
-        #encode data
+        # encode data
         data['Gender_n'] = self.le_Gender.transform([data['Gender']])[0]
-        data['Education_Level_n'] = self.le_Education_Level.transform([data['Education_Level']])[0]
-        data['Marital_Status_n'] = self.le_Marital_Status.transform([data['Marital_Status']])[0]
-        data['Income_Category_n'] = self.le_Income_Category.transform([data['Income_Category']])[0]
-        data['Card_Category_n'] = self.le_Card_Category.transform([data['Card_Category']])[0]
+        data['Education_Level_n'] = self.le_Education_Level.transform(
+            [data['Education_Level']]
+        )[0]
+        data['Marital_Status_n'] = self.le_Marital_Status.transform(
+            [data['Marital_Status']]
+        )[0]
+        data['Income_Category_n'] = self.le_Income_Category.transform(
+            [data['Income_Category']]
+        )[0]
+        data['Card_Category_n'] = self.le_Card_Category.transform(
+            [data['Card_Category']]
+        )[0]
 
         # delete redundent columns
-        dellist= ['Gender', 'Education_Level', 'Marital_Status', 'Income_Category', 'Card_Category']
-        for key in dellist :
+        dellist = [
+            'Gender',
+            'Education_Level',
+            'Marital_Status',
+            'Income_Category',
+            'Card_Category',
+        ]
+        for key in dellist:
             del data[key]
-    
-        features=data
+
+        features = data
         return features
 
     def predict(self, features):
-        pred = self.model.predict(pd.DataFrame(features,index=[0]))
+        pred = self.model.predict(pd.DataFrame(features, index=[0]))
         return pred[0]
 
     def lambda_handler(self, event):
@@ -142,7 +183,10 @@ class ModelService:
             prediction_event = {
                 'model': 'Credit_Card_Churn_Prediction',
                 'version': self.model_version,
-                'prediction': {'Churn_Prediction': prediction, 'profile_id': profile_id},
+                'prediction': {
+                    'Churn_Prediction': prediction,
+                    'profile_id': profile_id,
+                },
             }
 
             for callback in self.callbacks:
@@ -151,6 +195,7 @@ class ModelService:
             predictions_events.append(prediction_event)
 
         return {'predictions': predictions_events}
+
 
 class KinesisCallback:
     def __init__(self, kinesis_client, prediction_stream_name):
@@ -176,11 +221,15 @@ def create_kinesis_client():
     return boto3.client('kinesis', endpoint_url=endpoint_url)
 
 
-
-
-
 def init(prediction_stream_name: str, run_id: str, test_run: bool):
-    model,le_Gender,le_Education_Level,le_Marital_Status,le_Income_Category,le_Card_Category = load_model(run_id)
+    (
+        model,
+        le_Gender,
+        le_Education_Level,
+        le_Marital_Status,
+        le_Income_Category,
+        le_Card_Category,
+    ) = load_model(run_id)
 
     callbacks = []
 
@@ -189,6 +238,15 @@ def init(prediction_stream_name: str, run_id: str, test_run: bool):
         kinesis_callback = KinesisCallback(kinesis_client, prediction_stream_name)
         callbacks.append(kinesis_callback.put_record)
 
-    model_service = ModelService(model=model,le_Gender=le_Gender,le_Education_Level=le_Education_Level,le_Marital_Status=le_Marital_Status,le_Income_Category=le_Income_Category,le_Card_Category=le_Card_Category,model_version=run_id, callbacks=callbacks)
+    model_service = ModelService(
+        model=model,
+        le_Gender=le_Gender,
+        le_Education_Level=le_Education_Level,
+        le_Marital_Status=le_Marital_Status,
+        le_Income_Category=le_Income_Category,
+        le_Card_Category=le_Card_Category,
+        model_version=run_id,
+        callbacks=callbacks,
+    )
 
     return model_service
