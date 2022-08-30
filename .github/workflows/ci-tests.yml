@@ -47,7 +47,6 @@ jobs:
         run: |
           . run.sh      
 
-
   tf-plan:
     runs-on: ubuntu-latest
     steps:
