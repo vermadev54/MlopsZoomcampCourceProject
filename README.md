@@ -31,6 +31,7 @@ Predicting customers who are likely to drop off credit card. to work on customer
 
 
 
+
 ## Solution i have build random forest classification model with accuracy ~98%
 
 * Model training 
