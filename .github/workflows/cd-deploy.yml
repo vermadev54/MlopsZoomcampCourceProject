@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - 'develop'
-#    paths:
-#      - 'allconcept/**'
+    paths:
+      - 'allconcept/**'
 
 jobs:
   build-push-deploy:
