@@ -27,7 +27,8 @@ Predicting customers who are likely to drop off credit card. to work on customer
 
 * /monitoring : build batch monitoring service with evidently
 
-* /allconcept : build streaming api with (unit test + code lint + LaC + cicd ) 
+* /allconcept : build streaming api with (unit test + integration test + code lint + pre-commit hooks + LaC + cicd ) 
+
 
 
 

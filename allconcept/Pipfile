@@ -11,6 +11,7 @@ hyperopt = "*"
 prefect = "==2.0b5"
 deepdiff = "*"
 pytest = "*"
+pylint = "==2.14.4"
 
 [dev-packages]
 pytest = "*"

@@ -10,7 +10,7 @@ from deepdiff import DeepDiff
 kinesis_endpoint = os.getenv('KINESIS_ENDPOINT_URL', "http://localhost:4566")
 kinesis_client = boto3.client('kinesis', endpoint_url=kinesis_endpoint)
 
-stream_name = os.getenv('PREDICTIONS_STREAM_NAME', 'ride_predictions')
+stream_name = os.getenv('PREDICTIONS_STREAM_NAME')
 shard_id = 'shardId-000000000000'
 
 
@@ -40,11 +40,11 @@ actual_record = json.loads(records[0]['Data'])
 pprint(actual_record)
 
 expected_record = {
-    'model': 'ride_duration_prediction_model',
-    'version': 'Test123',
-    'prediction': {
-        'ride_duration': 21.3,
-        'ride_id': 256,
+      "model": "Credit_Card_Churn_Prediction",
+      "version": "f1ba7bfd01624384bb4f2ac6f2741d98",
+      "prediction": {
+        "Churn_Prediction": "Existing Customer",
+        "profile_id": 10
     },
 }
 

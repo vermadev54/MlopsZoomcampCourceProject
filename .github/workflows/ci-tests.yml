@@ -6,7 +6,6 @@ on:
     paths:
       - 'allconcept/**'
 
-
 env:
   AWS_DEFAULT_REGION: 'us-east-1'
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
